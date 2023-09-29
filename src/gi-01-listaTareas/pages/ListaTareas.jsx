@@ -5,19 +5,18 @@ import {ButtonBack} from '../../components/ButtonBack';
 const reducer = (state = [], action = {}) => {
   // console.log(action); //Object { type: "add_task", title: "aaa" }
   switch (action.type) {
-    case 'prueba':
-      return (
-        console.log(action.title) // Hola <-- viene del input
-
-      )
     case 'add_task':
       return [
         ...state, { id: state.length, title: action.title }
       ]
-
+    case 'del_task':
+      // ya es un array, no hace falta []
+      //si la tarea.ID es la distinta que action "negacíon adentro !="
+      return state.filter( (tarea) => tarea.id != action.id);
   }
   return state // este sería el default: { state }
 }
+
 
 export const ListaTareas = () => {
   const inputRef = useRef();
@@ -34,6 +33,14 @@ export const ListaTareas = () => {
       title: inputRef.current.value
     });
     inputRef.current.value = ''; // limpiamos input
+  }
+
+  const handleClickDelete = (idx) => {
+    // console.log(lista);
+    dispatch({
+      type: 'del_task',
+      id: idx
+    })
   }
 
   return (
@@ -57,7 +64,14 @@ export const ListaTareas = () => {
             <ul>
           {
               state?.map((lista, idx) => (
-                <li key={idx}>{lista.title}</li>
+                <li key={idx}>
+                  { lista.title }
+                  <button
+                    className='btn btn-dark bg-transparent bi bi-trash'
+                    onClick={() => handleClickDelete(idx)}
+                  >
+                  </button>
+                </li>
               ))
           }
             </ul>
