@@ -5,22 +5,21 @@ const initialState = {
   counter: 0
 }
 
-const reducer = (state = initialState, action = {}) => {
-
+const counterReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'incrementar':  return { counter: state.counter + 1 }
-    case 'decrementar':  return { counter: state.counter - 1 }
-    case 'reset':  return { counter: 0 }
-
+    case 'incrementar':  return { ...state, counter: state.counter + 1 };
+    case 'decrementar':  return { counter: state.counter - 1 };
+    case 'reset':  return { counter: 0 };
+    default : return state;
   }
-  return state
 }
 
 export const CounterLC = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // dispatch, dispara acciones para actualizar el estado
+  const [state, dispatch] = useReducer(counterReducer, initialState);
   return (
     <>
-      <ButtonBack /> <span> Luis Cabrera </span>
+      <ButtonBack nombre={'Luis Cabrera'}/>
 
 
       <h2>Contador {state.counter}</h2>
