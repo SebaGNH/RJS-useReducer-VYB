@@ -21,6 +21,7 @@ const reducer = (state = [], action = {}) => {
 export const ListaTareas = () => {
   const inputRef = useRef();
   // dispatch: evento para modificar el estado internamente
+  // primer argumento es la función reductora
   const [state, dispatch] = useReducer(reducer, reducer());
   // console.log('state', state);
 

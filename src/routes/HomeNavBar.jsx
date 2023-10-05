@@ -16,6 +16,10 @@ export const HomeNavBar = () => {
               ListaTareas
               </NavLink>
 
+              <NavLink to="/CounterLC" className="nav-link btn btn-outline-primary m-1">
+              Counter LC
+              </NavLink>
+
             </ul>
           </div>
         </div>
