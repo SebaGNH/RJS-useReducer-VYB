@@ -25,7 +25,7 @@ const reducer = (state = initialTodo, action = [{}]) => {
     //case Types.add: return [...state , { id: 5 , title: action.payload}]
     // el reducer debe mantenerce como una funcion pura por lo que no podemos usar acá el mathrandom para generar el id nuevo, este dato viene generalmente de la base de datos
     case Types.add: return [...state , action.payload ]
-    case Types.edit: return state
+    case Types.edit: return  action.payload
     default: return state;
   }
 }
@@ -34,23 +34,34 @@ export const TodoLC = () => {
   //Va reducer() xq estamos ejecutando la función y devuelve el "initialTodo" por state xq ya tenemos valore por defecto en reducer
   const [state, dispatch] = useReducer(reducer, reducer());
   const [inputText, setinputText] = useState('');
+  const [isEdit, setIsEdit] = useState(false);
+  const [todoEdit, setTodoEdit] = useState({});
 
   // onClick Add
   const handleClick = () => {
+  if (isEdit) {
+    const filtrado = state.filter(s => s.id !== todoEdit.id);
+    const newTodo = [ ...filtrado, { id: todoEdit.id , title: inputText}]
+    dispatch({
+      type: Types.edit,
+      payload: newTodo
+    });
+
+  } else {
     const newTodo = { id: Math.random().toString(36).substring(2) , title: inputText}
     dispatch({
       type: Types.add,
       payload: newTodo
     })
+  }
     setinputText(''); // Limpiamos input
+    setIsEdit(false)
   }
 
   const handleEdit = (todo) => { // { id: 1, title: "Todo #1" }
-    setinputText(todo.title)
-    dispatch({
-      type: Types.edit// ,
-      // payload: todo
-    });
+    setinputText(todo.title);
+    setTodoEdit(todo);
+    setIsEdit(true);
   }
 
 
