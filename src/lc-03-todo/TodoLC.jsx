@@ -75,7 +75,7 @@ export const TodoLC = () => {
 
       <div className='d-flex'>
 
-      <ul className='col-md-6'>
+      <ul className='col-md-8'>
         { state.map( (todo) => (
             <li key={todo.id}>
               {todo.title}
@@ -106,7 +106,7 @@ export const TodoLC = () => {
             </li>
           ))}
       </ul>
-      <div className="col-md-6">
+      <div className="col-md-4">
         <input
           type="text"
           value={inputText}

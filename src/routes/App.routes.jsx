@@ -5,6 +5,7 @@ import { ListaTareas } from '../gi-01-listaTareas/pages/ListaTareas';
 import { CounterLC } from '../lc-01-contador/CounterLC';
 import { CounterTypes } from '../lc-02-contadotTypes/CounterTypes';
 import { TodoLC } from '../lc-03-todo/TodoLC';
+import ProductAppLC from '../lc-04-productApp/ProductAppLC';
 
 
 export const AppRoutes = () => {
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
         <Route path='/CounterLC' element={<CounterLC />}/>
         <Route path='/CounterTypes' element={<CounterTypes />}/>
         <Route path='/TodoLC' element={<TodoLC />}/>
+        <Route path='/ProductAppLC' element={<ProductAppLC />}/>
       </Routes>
     </div>
   )

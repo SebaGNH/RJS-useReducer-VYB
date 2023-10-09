@@ -27,6 +27,10 @@ export const HomeNavBar = () => {
               Todo LC
               </NavLink>
 
+              <NavLink to="/ProductAppLC" className="nav-link btn btn-outline-primary m-1">
+              Product LC
+              </NavLink>
+
             </ul>
           </div>
         </div>
