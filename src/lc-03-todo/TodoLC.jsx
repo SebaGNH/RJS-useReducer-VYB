@@ -9,7 +9,8 @@ const initialTodo = [
 const Types = {
   add: 'add',
   delete: 'delete',
-  edit: 'edit'
+  edit: 'edit',
+  update: 'update'
 }
 
 // [{}] xq el initialTodo es un arreglo de objetos
@@ -26,6 +27,8 @@ const reducer = (state = initialTodo, action = [{}]) => {
     // el reducer debe mantenerce como una funcion pura por lo que no podemos usar acá el mathrandom para generar el id nuevo, este dato viene generalmente de la base de datos
     case Types.add: return [...state , action.payload ]
     case Types.edit: return  action.payload
+    // devolvemos la tarea actualizada o la original
+    case Types.update: return state.map( stat => stat.id === action.payload.id ? action.payload : stat )
     default: return state;
   }
 }
@@ -84,9 +87,21 @@ export const TodoLC = () => {
                   payload: todo.id
                 })}
               ></button>
+              {/* Mi edit */}
+              <button
+                className='btn btn-dark bg-transparent bi bi-pencil'
+                onClick={ () => handleEdit(todo) }
+              ></button>
               <button
                 className='btn btn-dark bg-transparent bi bi-pencil-square'
-                onClick={ () => handleEdit(todo) }
+                onClick={ () =>
+                  // escribimos el texto y después pulsamos el edit
+                  dispatch({
+                    type: Types.update,
+                    // realizamos copia de todo y reemplazamos title
+                    payload: {...todo, title: inputText}
+                  })
+                }
               ></button>
             </li>
           ))}
@@ -98,7 +113,7 @@ export const TodoLC = () => {
           onChange={ (ev) => setinputText(ev.target.value)}
           placeholder='Tarea'
           className='form-control'
-          maxLength={30}
+          maxLength={25}
         />
         <button
           className='btn btn-primary mt-2'
