@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-export const NLRandom = () => {
+export const NL_Random = () => {
   return (
     <>
       <h2 className='text-info'>Random</h2>

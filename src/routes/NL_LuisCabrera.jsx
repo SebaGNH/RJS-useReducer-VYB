@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-export const NlLuisCabrera = () => {
+export const NL_LuisCabrera = () => {
   return <div className='my-3'>
     <h2 className='text-info'>Luis Cabrera</h2>
     <nav className="navbar navbar-expand-sm navbar-dark">
