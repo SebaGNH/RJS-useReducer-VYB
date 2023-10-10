@@ -1,13 +1,13 @@
-import React from 'react'
-import { ButtonBack} from '../components/ButtonBack';
+import React from "react";
+import { ButtonBack } from "../components/ButtonBack";
 
 const ProductAppLC = () => {
   return (
     <>
-      <ButtonBack nombre='Luis Cabrera'/>
-      <h1>Product App</h1>
+      <ButtonBack nombre="Luis Cabrera " />
+      <h1>Product App </h1>
     </>
-  )
-}
+  );
+};
 
-export default ProductAppLC
+export default ProductAppLC;
