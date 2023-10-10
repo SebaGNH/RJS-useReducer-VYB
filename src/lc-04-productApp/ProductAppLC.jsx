@@ -1,10 +1,11 @@
 import React, { useReducer } from "react";
 import { ButtonBack } from "../components/ButtonBack";
 import { initialState, productReducer } from "./reducers/productReducer";
+import { Types } from "./types/Types";
 
 const ProductAppLC = () => {
   const [state, dispatch] = useReducer(productReducer, initialState);
-  console.log(state)
+  // console.log(state)
   return (
     <>
       <ButtonBack nombre="Luis Cabrera " />
@@ -15,10 +16,20 @@ const ProductAppLC = () => {
           <li key={product.id}>
             {product.title}
             <button
-              className="btn btn-dark bg-transparent bi-plus-square">
+              className="btn btn-dark bg-transparent bi-eye"
+              onClick={ () => dispatch({
+                type: Types.show,
+                payload: product.id
+              })}
+              >
             </button>
             <button
-              className="btn btn-dark bg-transparent bi-eye">
+              className="btn btn-dark bg-transparent bi-plus-square"
+            onClick={() => dispatch({
+              type: Types.add,
+              payload: product
+            })}
+            >
             </button>
             </li>
           ))
@@ -33,7 +44,12 @@ const ProductAppLC = () => {
             <li key={car.id}>
           {car.title}
               <button
-                className="btn btn-dark bg-transparent bi bi-cart">
+                className="btn btn-dark bg-transparent bi bi-cart"
+                onClick={() => dispatch({
+                  type: Types.remove,
+                  payload: car.id
+                })}
+              >
               </button>
             </li>
           ))
