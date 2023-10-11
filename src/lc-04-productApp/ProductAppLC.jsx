@@ -5,7 +5,7 @@ import { Types } from "./types/Types";
 
 const ProductAppLC = () => {
   const [state, dispatch] = useReducer(productReducer, initialState);
-  // console.log(state)
+  console.log(state)
   return (
     <>
       <ButtonBack nombre="Luis Cabrera " />
@@ -42,7 +42,7 @@ const ProductAppLC = () => {
         {
           state.cart.map( car => (
             <li key={car.id}>
-          {car.title}
+          {car.title} - Quantity: {car.quantity}
               <button
                 className="btn btn-dark bg-transparent bi bi-cart"
                 onClick={() => dispatch({

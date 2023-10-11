@@ -13,7 +13,7 @@ export const initialState = {
 
 export const productReducer = (state = initialState, action = {}) => {
   // console.log(state.cart)
-  console.log(action)
+  // console.log(action)
 
   switch (action.type) {
     // Show
@@ -22,13 +22,33 @@ export const productReducer = (state = initialState, action = {}) => {
       active: state.products.find( prod => prod.id === action.payload)
         }
     // Add
-    case Types.add: return {
+    // case Types.add: return {
+    //   ...state,
+    //   cart: [
+    //     ...state.cart, // Agregamos  los productos del carrito ...state.cart
+    //     action.payload // Nuevo producto completo
+    //   ]
+    // }
+    // Add
+    case Types.add: { // cp = cart product
+      const newProduct = state.cart.find(cp => cp.id === action.payload.id);
+      return newProduct
+      ? {
+        ...state, // retornamos el estado actual, pero editando el carrito
+        cart: state.cart.map( cp =>
+          cp.id === newProduct.id
+            ? {...cp, quantity: cp.quantity +1}
+            : cp
+        )
+
+      }
+      : {
       ...state,
       cart: [
         ...state.cart, // Agregamos  los productos del carrito ...state.cart
-        action.payload // Nuevo producto completo
+        {...action.payload, quantity: 1 } // Nuevo producto completo
       ]
-    }
+    }}
     // Remove
     case Types.remove: return {
       ...state,
