@@ -5,7 +5,7 @@ import { Types } from "./types/Types";
 
 const ProductAppLC = () => {
   const [state, dispatch] = useReducer(productReducer, initialState);
-  console.log(state)
+  console.log('State',state)
   return (
     <>
       <ButtonBack nombre="Luis Cabrera " />
@@ -44,9 +44,17 @@ const ProductAppLC = () => {
             <li key={car.id}>
           {car.title} - Quantity: {car.quantity}
               <button
-                className="btn btn-dark bg-transparent bi bi-cart"
+                className="btn btn-dark bg-transparent bi bi-file-minus"
                 onClick={() => dispatch({
-                  type: Types.remove,
+                  type: Types.removeOne,
+                  payload: car.id
+                })}
+              >
+              </button>
+              <button
+                className="btn btn-dark bg-transparent bi bi-trash"
+                onClick={() => dispatch({
+                  type: Types.removeAll,
                   payload: car.id
                 })}
               >

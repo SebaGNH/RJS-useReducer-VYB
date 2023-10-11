@@ -40,7 +40,6 @@ export const productReducer = (state = initialState, action = {}) => {
             ? {...cp, quantity: cp.quantity +1}
             : cp
         )
-
       }
       : {
       ...state,
@@ -49,10 +48,27 @@ export const productReducer = (state = initialState, action = {}) => {
         {...action.payload, quantity: 1 } // Nuevo producto completo
       ]
     }}
-    // Remove
-    case Types.remove: return {
+    // Remove All
+    case Types.removeAll: return {
       ...state,
       cart: state.cart.filter( car => car.id !== action.payload )
+    }
+    // Remove One
+    case Types.removeOne: {
+      const productDelete = state.cart.find( cp => cp.id === action.payload);
+      return productDelete.quantity <= 1
+      ? { // Elimina todos si la cantiad es inferior a 1
+          ...state,
+          cart: state.cart.filter( cp => cp.id !== action.payload)
+        }
+      : { // elimina de a 1
+        ...state,
+        cart: state.cart.map( cp =>
+          cp.id === action.payload
+          ? {...cp, quantity: cp.quantity -1 }
+          : cp
+        )
+      }
     }
     default:
       state;

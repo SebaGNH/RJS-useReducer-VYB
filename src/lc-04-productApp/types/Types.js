@@ -1,5 +1,6 @@
 export const Types = {
   show: 'Product - Show',
   add: 'Product - Add',
-  remove: 'Product - Remove'
+  removeAll: 'Product - Remove All',
+  removeOne: 'Product - Remove One'
 }
